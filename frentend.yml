@@ -1,0 +1,7 @@
+- name: Frentend setup
+  hosts: all
+  tasks:
+    - name: Install Nginx
+      ansible.builtin.dnf:
+        name: nginx
+        state: latest
