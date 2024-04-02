@@ -24,7 +24,6 @@ pipelines:
                     - backend
                   command: bash
                   run_if: passed
-
       - QA:
           fetch_materials: true
           environment_variables:
