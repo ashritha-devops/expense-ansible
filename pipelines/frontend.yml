@@ -11,17 +11,19 @@ pipelines:
     stages:
       - DEV:
           fetch_materials: true
+          environment_variables:
+            env: dev
           approval:
             type: manual
           jobs:
             ansible-playbook:
               tasks:
-                - exec:
-                    arguments:
-                      - ansible.sh
-                      - frontend
-                    command: bash
-                    run_if: passed
+              - exec:
+                  arguments:
+                    - ansible.sh
+                    - frontend
+                  command: bash
+                  run_if: passed
 
 
 
