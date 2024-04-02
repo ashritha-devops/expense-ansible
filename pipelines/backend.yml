@@ -1,0 +1,45 @@
+format_version: 10
+pipelines:
+  backend:
+    group: defaultGroup
+    materials:
+      git-f766c1e:
+        git: https://github.com/ashritha-devops/expense-ansible.git
+        shallow_clone: false
+        auto_update: true
+        branch: main
+    stages:
+      - DEV:
+          fetch_materials: true
+          environment_variables:
+            env: dev
+          approval:
+            type: manual
+          jobs:
+            ansible-playbook:
+              tasks:
+              - exec:
+                  arguments:
+                    - ansible.sh
+                    - backend
+                  command: bash
+                  run_if: passed
+
+      - QA:
+          fetch_materials: true
+          environment_variables:
+            env: QA
+          approval:
+            type: manual
+          jobs:
+            ansible-playbook:
+              tasks:
+                - exec:
+                    arguments:
+                      - ansible.sh
+                      - backend
+                    command: bash
+                    run_if: passed
+
+
+
